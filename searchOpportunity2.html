@@ -1,0 +1,42 @@
+<template>
+    <div>
+        <lightning-input label="Search:" placeholder="Enter Opportunity name" value={oppName} onchange={getSearchValue}>
+        </lightning-input>
+        <lightning-button type="success" label="Search" onclick={searchHandler}></lightning-button>
+    </div>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small" border="1">
+        <tr class="slds-line-height_reset">
+            <th class="" scope="col"><b>Opportunity Name</b></th>
+            <th class="" scope="col"><b>Account Name</b></th>
+            <th class="" scope="col"><b>Stage</b></th>
+            <th class="" scope="col"><b>Type</b></th>
+            <th class="" scope="col"><b>Amount</b></th>
+            <th class="" scope="col"><b>Navigate</b></th>
+        </tr>
+        <tr for:item="k" for:each={visibleOpportunities} key={k.Id} class="slds-line-height_reset">
+            <td class="slds-truncate">{k.Name}</td>
+            <td class="slds-truncate">{k.Account.Name}</td>
+            <td class="slds-truncate">{k.StageName}</td>
+            <td class="slds-truncate">{k.Type}</td>
+            <td class="slds-truncate">{k.Amount}</td>
+            <td>
+                <lightning-button variant="brand-outline" label="find" value={k.Id} onclick={navigHandler}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </td>
+        </tr>
+    </table>
+    <lightning-layout>
+        <lightning-layout-item>
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+            </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="grow">
+            <p class="slds-text-align_center">Displaying {currentPage} of {totalPages} Page</p>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}>
+            </lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
